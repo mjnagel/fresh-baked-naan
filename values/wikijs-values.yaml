@@ -1,22 +1,12 @@
 domain: ###ZARF_VAR_DOMAIN###
 
 ## This will override the postgresql chart values
-# externalPostgresql:
-#   # note: ?sslmode=require => ?ssl=true
-#   databaseURL: postgresql://postgres:postgres@postgres:5432/wiki?ssl=true
-#   # For self signed CAs, like DigitalOcean
-#   NODE_TLS_REJECT_UNAUTHORIZED: "0"
+externalPostgresql:
+  # note: ?sslmode=require => ?ssl=true
+  databaseURL: postgresql://###ZARF_VAR_DB_USERNAME###:###ZARF_VAR_DB_PASSWORD###@###ZARF_VAR_DB_HOST###:5432/###ZARF_VAR_DB_NAME###?sslmode=prefer
 
 ## Configuration values for the postgresql dependency.
 ## ref: https://github.com/kubernetes/charts/blob/master/stable/postgresql/README.md
 ##
 postgresql:
-  enabled: true
-#  enabled: false
-#  postgresqlHost: ###ZARF_VAR_WIKIJS_DB_ENDPOINT###
-#  postgresqlPort: 5432
-#  fullnameOverride: ""
-#  postgresqlUser: ###ZARF_VAR_WIKIJS_DB_USERNAME###
-#  postgresqlDatabase: ###ZARF_VAR_WIKIJS_DB_NAME###
-#  existingSecret: wiki-postgres
-
+  enabled: false

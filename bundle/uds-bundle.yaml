@@ -1,0 +1,27 @@
+kind: UDSBundle
+metadata:
+  name: sonarqube-test
+  description: A UDS bundle for deploying Sonarqube and it's dependencies on a development cluster
+  # x-release-please-start-version
+  version: 0.1.0
+  # x-release-please-end
+
+packages:
+  - name: dev-postgres
+    repository: ghcr.io/defenseunicorns/packages/uds/dev-postgres
+    ref: 0.0.1
+  
+  - name: dev-secrets
+    path: ../
+    ref: 0.1.0
+    exports:
+      - name: DB_PASSWORD
+
+  - name: wikijs
+    path: ../
+    # x-release-please-start-version
+    ref: 0.1.0
+    # x-release-please-end
+    imports:
+      - name: DB_PASSWORD
+        package: dev-secrets
