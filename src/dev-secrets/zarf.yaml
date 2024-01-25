@@ -16,3 +16,9 @@ components:
             setVariables:
               - name: DB_PASSWORD
                 sensitive: true
+    # This is a bug in uds-cli??????????
+    # Don't actually need this manifest
+    manifests:
+      - name: postgres-password
+        files:
+          - "postgres-secret.yaml"
