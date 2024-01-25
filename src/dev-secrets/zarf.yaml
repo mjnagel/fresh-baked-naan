@@ -11,7 +11,7 @@ components:
     actions:
       onDeploy:
         before:
-          - cmd: kubectl get secret -n dev-postgres postgresql --template={{.data.password}} | base64 -d
+          - cmd: kubectl get secret -n dev-postgres postgresql --template='{{index .data "postgres-password"}}' | base64 -d
             mute: true
             setVariables:
               - name: POSTGRES_DB_PASSWORD

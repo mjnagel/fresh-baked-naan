@@ -11,12 +11,12 @@ metadata:
 variables:
   - name: DOMAIN
     default: "uds.dev"
-#  - name: WIKIJS_DB_NAME
-#    default: "wiki"
-#  - name: WIKIJS_DB_USERNAME
-#    default: "postgres"
-#  - name: WIKIJS_DB_ENDPOINT
-#    default: "postgres"
+  - name: WIKIJS_DB_NAME
+    default: "wiki"
+  - name: WIKIJS_DB_USERNAME
+    default: "postgres"
+  - name: WIKIJS_DB_ENDPOINT
+    default: "postgres"
 
 components:
   - name: wikijs

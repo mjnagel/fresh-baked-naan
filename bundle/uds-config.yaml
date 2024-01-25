@@ -1,0 +1,7 @@
+variables:
+  dev-postgres:
+    db_username: "postgres"
+    db_name: "wiki"
+  wikijs:
+    wikijs_db_endpoint: "postgresql.dev-postgres.svc.cluster.local"
+

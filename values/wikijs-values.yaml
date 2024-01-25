@@ -11,12 +11,11 @@ domain: ###ZARF_VAR_DOMAIN###
 ## ref: https://github.com/kubernetes/charts/blob/master/stable/postgresql/README.md
 ##
 postgresql:
-  enabled: true
-#  enabled: false
-#  postgresqlHost: ###ZARF_VAR_WIKIJS_DB_ENDPOINT###
-#  postgresqlPort: 5432
-#  fullnameOverride: ""
-#  postgresqlUser: ###ZARF_VAR_WIKIJS_DB_USERNAME###
-#  postgresqlDatabase: ###ZARF_VAR_WIKIJS_DB_NAME###
-#  existingSecret: wiki-postgres
+  enabled: false
+  postgresqlHost: ###ZARF_VAR_WIKIJS_DB_ENDPOINT###
+  postgresqlPort: 5432
+  fullnameOverride: ""
+  postgresqlUser: ###ZARF_VAR_WIKIJS_DB_USERNAME###
+  postgresqlDatabase: ###ZARF_VAR_WIKIJS_DB_NAME###
+  existingSecret: wiki-postgres
 
