@@ -18,5 +18,21 @@ components:
                 sensitive: true
     manifests:
       - name: postgres-password
+        namespace: outline
         files:
           - "postgres-secret.yaml"
+  - name: redis-password
+    required: true
+    actions:
+      onDeploy:
+        before:
+          - cmd: kubectl get secret -n dev-redis redis --template='{{ index .data "redis-password" }}' | base64 -d
+            mute: true
+            setVariables:
+              - name: REDIS_PASSWORD
+                sensitive: true
+    manifests:
+      - name: redis-password
+        namespace: outline
+        files:
+          - redis-secret.yaml

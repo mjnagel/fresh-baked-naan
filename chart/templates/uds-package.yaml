@@ -1,21 +1,21 @@
 apiVersion: uds.dev/v1alpha1
 kind: Package
 metadata:
-  name: wikijs
+  name: outline
   namespace: {{ .Release.Namespace }}
 spec:
   network:
     expose:
-      - service: wiki
+      - service: outline
         podLabels:
-          app.kubernetes.io/name: wiki
+          app.kubernetes.io/name: outline
         gateway: tenant
-        host: wiki
+        host: outline
         port: 80
         targetPort: 3000
     allow:
-      # Todo: wide open for hitting in-cluster or external postgres
+      # Todo: wide open for hitting in-cluster or external postgres/redis
       - direction: Egress
         podLabels:
-          app.kubernetes.io/name: wiki
+          app.kubernetes.io/name: outline
         remoteGenerated: Anywhere

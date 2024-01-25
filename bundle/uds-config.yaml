@@ -1,7 +1,7 @@
 shared:
   db_username: "postgres"
-  db_name: "wiki"
+  db_name: "outline"
 
 variables:
-  wikijs:
+  outline:
     db_host: "postgresql.dev-postgres.svc.cluster.local"

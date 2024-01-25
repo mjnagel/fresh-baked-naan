@@ -1,0 +1,5 @@
+image:
+  registry: docker.io
+  repository: outlinewiki/outline
+  tag: 0.74.0
+  
