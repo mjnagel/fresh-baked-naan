@@ -1,7 +1,7 @@
 kind: UDSBundle
 metadata:
-  name: sonarqube-test
-  description: A UDS bundle for deploying Sonarqube and it's dependencies on a development cluster
+  name: wikijs-test
+  description: A UDS bundle for deploying WikiJS and it's dependencies on a development cluster
   # x-release-please-start-version
   version: 0.1.0
   # x-release-please-end
