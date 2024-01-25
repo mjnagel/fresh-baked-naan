@@ -11,11 +11,11 @@ metadata:
 variables:
   - name: DOMAIN
     default: "uds.dev"
-  - name: WIKIJS_DB_NAME
-    default: "wiki"
-  - name: WIKIJS_DB_USERNAME
-    default: "postgres"
-  - name: WIKIJS_DB_ENDPOINT
+  - name: DB_NAME
+    default: "wikijs"
+  - name: DB_USERNAME
+    default: "wikijs"
+  - name: DB_ENDPOINT
     default: "postgres"
 
 components:
@@ -23,24 +23,23 @@ components:
     required: true
     description: "Deploy wiki.js"
     charts:
-#    - name: uds-wikijs-config
-#      namespace: wikijs
-#      version: 0.1.0
-#      localPath: chart
-    #https://github.com/Requarks/wiki/tree/main/dev/helm#introduction
-    - name: wiki
-      #helm repo add requarks https://charts.js.wiki
-      #helm search repo requarks/wiki -l
-      version: 2.2.20
-      namespace: wikijs
-      url: https://charts.js.wiki
-      repoName: wiki
-      releaseName: wiki
-      valuesFiles:
-        - values/wikijs-values.yaml
+      - name: uds-wikijs-config
+        namespace: wikijs
+        version: 0.1.0
+        localPath: chart
+      #https://github.com/Requarks/wiki/tree/main/dev/helm#introduction
+      - name: wiki
+        #helm repo add requarks https://charts.js.wiki
+        #helm search repo requarks/wiki -l
+        version: 2.2.20
+        namespace: wikijs
+        url: https://charts.js.wiki
+        repoName: wiki
+        releaseName: wiki
+        valuesFiles:
+          - values/wikijs-values.yaml
     images:
       - "requarks/wiki:latest"
       - "docker.io/bitnami/minideb:stretch"
       - "docker.io/bitnami/postgresql:11.5.0-debian-9-r60"
       - "busybox"
-
