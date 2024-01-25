@@ -14,14 +14,10 @@ packages:
   - name: dev-secrets
     path: ../
     ref: 0.1.0
-    exports:
-      - name: DB_PASSWORD
 
   - name: wikijs
     path: ../
     # x-release-please-start-version
     ref: 0.1.0
     # x-release-please-end
-    imports:
-      - name: DB_PASSWORD
-        package: dev-secrets
+

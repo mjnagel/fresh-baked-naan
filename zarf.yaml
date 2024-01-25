@@ -17,8 +17,6 @@ variables:
     default: "postgres"
   - name: DB_HOST
     default: "postgres"
-  - name: DB_PASSWORD
-    default: "postgres"
 
 components:
   - name: wikijs
