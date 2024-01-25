@@ -1,5 +1,14 @@
+# Image reference
 image:
   registry: docker.io
   repository: outlinewiki/outline
   tag: 0.74.0
-  
+
+# Publicly exposed URL
+url: https://uds.outline.dev
+
+# SSO configuration
+sso:
+  google:
+    client_id:
+    client_secret:

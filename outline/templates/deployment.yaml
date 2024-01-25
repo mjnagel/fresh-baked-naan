@@ -16,6 +16,14 @@ spec:
         - name: outline
           image: {{ .Values.image.registry }}/{{ .Values.image.repository }}:{{ .Values.image.tag }}
           env:
+            # Generate a hex-encoded 32-byte random key. You should use `openssl rand -hex 32`
+            # in your terminal to generate a random value.
+            - name: SECRET_KEY
+              value: {{ TODO }}
+            # Generate a unique random key. The format is not important but you could still use
+            # `openssl rand -hex 32` in your terminal to produce this.
+            - name: UTILS_SECRET
+              value: {{ TODO }}
             - name: DATABASE_URL
               valueFrom:
                 secretKeyRef:
@@ -26,5 +34,23 @@ spec:
                 secretKeyRef:
                   name: outline-redis
                   key: url
+            - name: URL
+              value: {{ .Values.url }}
+            - name: PORT
+              value: 443
+            {{- if .Values.sso.google.client_id }}
+            - name: GOOGLE_CLIENT_ID
+              value: {{ .Values.sso.google.client_id }}
+            {{- end }}
+            {{- if .Values.sso.google.client_secret }}
+            - name: GOOGLE_CLIENT_SECRET
+              value: {{ .Values.sso.google.client_secret }}
+            {{- end }}
+            # Disable HTTPS to allow Istio ingress
+            - name: FORCE_HTTPS
+              value: false
+            # Disable telemetry
+            - name: ENABLE_UPDATES
+              value: false
           ports:
             - containerPort: 3000
