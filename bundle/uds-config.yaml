@@ -1,6 +1,6 @@
 shared:
-  db_username: "wikijs"
-  db_name: "wikijs"
+  db_username: "postgres"
+  db_name: "wiki"
 
 variables:
   wikijs:

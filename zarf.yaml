@@ -12,9 +12,9 @@ variables:
   - name: DOMAIN
     default: "uds.dev"
   - name: DB_NAME
-    default: "wikijs"
+    default: "wiki"
   - name: DB_USERNAME
-    default: "wikijs"
+    default: "postgres"
   - name: DB_HOST
     default: "postgres"
 
