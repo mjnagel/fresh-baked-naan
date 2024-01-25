@@ -1,12 +1,18 @@
 includes:
+  - setup: https://raw.githubusercontent.com/defenseunicorns/uds-common-tasks/v0.1.1/tasks/setup.yaml
   - create: https://raw.githubusercontent.com/defenseunicorns/uds-common-tasks/v0.1.1/tasks/create.yaml
   - deploy: https://raw.githubusercontent.com/defenseunicorns/uds-common-tasks/v0.1.1/tasks/deploy.yaml
 
 tasks:
   - name: default
     actions:
+      - task: setup:k3d-test-cluster
       - task: create-bundle
       - task: deploy-bundle
+
+  - name: setup
+    actions:
+      - task: setup:k3d-test-cluster
 
   - name: create
     actions:
