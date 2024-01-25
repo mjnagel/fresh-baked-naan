@@ -15,7 +15,7 @@ variables:
     default: "wikijs"
   - name: DB_USERNAME
     default: "wikijs"
-  - name: DB_ENDPOINT
+  - name: DB_HOST
     default: "postgres"
 
 components:

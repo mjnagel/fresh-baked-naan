@@ -5,7 +5,7 @@ domain: ###ZARF_VAR_DOMAIN###
 ##
 postgresql:
   enabled: false
-  postgresqlHost: ###ZARF_VAR_DB_ENDPOINT###
+  postgresqlHost: ###ZARF_VAR_DB_HOST###
   postgresqlPort: 5432
   fullnameOverride: ""
   postgresqlUser: ###ZARF_VAR_DB_USERNAME###
