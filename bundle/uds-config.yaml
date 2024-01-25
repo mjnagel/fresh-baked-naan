@@ -3,5 +3,6 @@ shared:
   db_name: "outline"
 
 variables:
-  outline:
+  dev-secrets:
     db_host: "postgresql.dev-postgres.svc.cluster.local"
+    redis_host: "redis.dev-redis.svc.cluster.local"

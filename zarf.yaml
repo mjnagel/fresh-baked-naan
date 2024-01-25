@@ -11,12 +11,6 @@ metadata:
 variables:
   - name: DOMAIN
     default: "uds.dev"
-  - name: DB_NAME
-    default: "outline"
-  - name: DB_USERNAME
-    default: "postgres"
-  - name: DB_HOST
-    default: "postgres"
 
 components:
   - name: outline

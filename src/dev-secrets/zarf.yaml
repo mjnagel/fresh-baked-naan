@@ -5,6 +5,18 @@ metadata:
   version: "0.1.0"
   architecture: amd64
 
+variables:
+  - name: DB_NAME
+    default: "outline"
+  - name: DB_USERNAME
+    default: "postgres"
+  - name: DB_HOST
+    default: "postgres"
+  - name: REDIS_HOST
+    default: "redis"
+  - name: REDIS_PASSWORD
+    default: "redis"
+
 components:
   - name: postgres-password
     required: true
