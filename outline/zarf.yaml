@@ -23,7 +23,7 @@ components:
       - name: outline
         version: 0.1.0
         namespace: outline
-        localPath: outline
+        localPath: outline-chart
         valuesFiles:
           - values/outline-values.yaml
     images:
