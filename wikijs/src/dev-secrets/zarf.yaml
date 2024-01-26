@@ -1,0 +1,22 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/defenseunicorns/zarf/main/zarf.schema.json
+kind: ZarfPackageConfig
+metadata:
+  name: dev-secrets
+  version: "0.1.0"
+  architecture: amd64
+
+components:
+  - name: postgres-password
+    required: true
+    actions:
+      onDeploy:
+        before:
+          - cmd: kubectl get secret -n dev-postgres postgresql --template='{{index .data "postgres-password"}}' | base64 -d
+            mute: true
+            setVariables:
+              - name: DB_PASSWORD
+                sensitive: true
+    manifests:
+      - name: postgres-password
+        files:
+          - "postgres-secret.yaml"

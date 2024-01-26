@@ -1,0 +1,45 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/defenseunicorns/zarf/main/zarf.schema.json
+kind: ZarfPackageConfig
+metadata:
+  name: wikijs
+  description:  "UDS WikiJS package"
+  # x-release-please-start-version
+  version: "0.1.0"
+  # x-release-please-end
+  architecture: amd64
+
+variables:
+  - name: DOMAIN
+    default: "uds.dev"
+  - name: DB_NAME
+    default: "wiki"
+  - name: DB_USERNAME
+    default: "postgres"
+  - name: DB_HOST
+    default: "postgres"
+
+components:
+  - name: wikijs
+    required: true
+    description: "Deploy wiki.js"
+    charts:
+      - name: uds-wikijs-config
+        namespace: wikijs
+        version: 0.1.0
+        localPath: chart
+      #https://github.com/Requarks/wiki/tree/main/dev/helm#introduction
+      - name: wiki
+        #helm repo add requarks https://charts.js.wiki
+        #helm search repo requarks/wiki -l
+        version: 2.2.20
+        namespace: wikijs
+        url: https://charts.js.wiki
+        repoName: wiki
+        releaseName: wiki
+        valuesFiles:
+          - values/wikijs-values.yaml
+    images:
+      - "requarks/wiki:latest"
+      - "docker.io/bitnami/minideb:stretch"
+      - "docker.io/bitnami/postgresql:11.5.0-debian-9-r60"
+      - "busybox"

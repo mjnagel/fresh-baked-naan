@@ -1,0 +1,7 @@
+shared:
+  db_username: "postgres"
+  db_name: "wiki"
+
+variables:
+  wikijs:
+    db_host: "postgresql.dev-postgres.svc.cluster.local"
