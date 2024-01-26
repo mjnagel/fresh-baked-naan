@@ -11,8 +11,55 @@ metadata:
 variables:
   - name: DOMAIN
     default: "uds.dev"
+  - name: GENERATE_KEYS
+  - name: OUTLINE_SECRET_KEY
+  - name: OUTLINE_UTILS_SECRET
 
 components:
+  - name: outline-keys
+    required: true
+    actions:
+      onDeploy:
+        before:
+          - cmd: |
+              NEED_SECRET=$(./zarf tools kubectl get secret -n zarf outline-keys 2>/dev/null || true)
+              if [ -z "$NEED_SECRET" ]; then
+                echo "true"
+              else
+                echo "false"
+              fi
+            mute: true
+            description: "Preflight"
+            setVariables:
+              - name: GENERATE_KEYS
+                sensitive: false
+          - cmd: |
+              if [ ${ZARF_VAR_GENERATE_KEYS} = true ]; then
+                openssl rand -hex 32
+              else
+                ./zarf tools kubectl get secret -n zarf outline-keys -o go-template='{{index .data "outline-utils-secret" | base64decode}}' 2>/dev/null || true
+              fi
+            mute: true
+            description: "Set outline util secret"
+            setVariables:
+              - name: OUTLINE_UTILS_SECRET
+                sensitive: true
+          - cmd: |
+              if [ ${ZARF_VAR_GENERATE_KEYS} = true ]; then
+                openssl rand -hex 32
+              else
+                ./zarf tools kubectl get secret -n zarf outline-keys -o go-template='{{index .data "outline-secret-key" | base64decode}}' 2>/dev/null || true
+              fi
+            mute: true
+            description: "Set outline secret key"
+            setVariables:
+              - name: OUTLINE_SECRET_KEY
+                sensitive: true
+    manifests:
+      - name: outline-keys-secret
+        namespace: zarf
+        files:
+          - ./manifests/outline-keys-secret.yaml
   - name: outline
     required: true
     charts:

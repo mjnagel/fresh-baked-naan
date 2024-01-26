@@ -12,3 +12,7 @@ sso:
   google:
     client_id:
     client_secret:
+
+secretKey: ###ZARF_VAR_OUTLINE_SECRET_KEY###
+utilsSecret: ###ZARF_VAR_OUTLINE_UTILS_SECRET###
+
