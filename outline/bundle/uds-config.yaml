@@ -1,0 +1,8 @@
+shared:
+  db_username: "postgres"
+  db_name: "outline"
+
+variables:
+  dev-secrets:
+    db_host: "postgresql.dev-postgres.svc.cluster.local"
+    redis_host: "redis-master.dev-redis.svc.cluster.local"

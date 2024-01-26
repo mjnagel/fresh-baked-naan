@@ -1,0 +1,61 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: outline
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app.kubernetes.io/name: outline
+spec:
+  replicas: {{ .Values.replicas }}
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: outline
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: outline
+    spec:
+      containers:
+        - name: outline
+          image: {{ .Values.image.registry }}/{{ .Values.image.repository }}:{{ .Values.image.tag }}
+          env:
+            # Generate a hex-encoded 32-byte random key. You should use `openssl rand -hex 32`
+            # in your terminal to generate a random value.
+            - name: SECRET_KEY
+              value: {{ .Values.secretKey }}
+            # Generate a unique random key. The format is not important but you could still use
+            # `openssl rand -hex 32` in your terminal to produce this.
+            - name: UTILS_SECRET
+              value: {{ .Values.utilsSecret }}
+            - name: DATABASE_URL
+              valueFrom:
+                secretKeyRef:
+                  name: outline-postgres
+                  key: url
+            - name: REDIS_URL
+              valueFrom:
+                secretKeyRef:
+                  name: outline-redis
+                  key: url
+            - name: URL
+              value: {{ .Values.url }}
+            - name: PORT
+              value: "3000"
+            {{- if .Values.sso.google.client_id }}
+            - name: GOOGLE_CLIENT_ID
+              value: {{ .Values.sso.google.client_id }}
+            {{- end }}
+            {{- if .Values.sso.google.client_secret }}
+            - name: GOOGLE_CLIENT_SECRET
+              value: {{ .Values.sso.google.client_secret }}
+            {{- end }}
+            # Disable HTTPS to allow Istio ingress
+            - name: FORCE_HTTPS
+              value: "false"
+            # Disable telemetry
+            - name: ENABLE_UPDATES
+              value: "false"
+            - name: PGSSLMODE
+              value: disable
+          ports:
+            - containerPort: 3000
