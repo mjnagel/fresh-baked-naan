@@ -13,7 +13,7 @@ variables:
   - name: DB_HOST
     default: "postgres"
   - name: REDIS_HOST
-    default: "redis"
+    default: "redis-master"
   - name: REDIS_PASSWORD
     default: "redis"
 

@@ -1,7 +1,7 @@
 kind: UDSBundle
 metadata:
-  name: wikijs-test
-  description: A UDS bundle for deploying WikiJS and it's dependencies on a development cluster
+  name: outline-test
+  description: A UDS bundle for deploying outline and it's dependencies on a development cluster
   # x-release-please-start-version
   version: 0.1.0
   # x-release-please-end

@@ -7,6 +7,9 @@ metadata:
     app.kubernetes.io/name: outline
 spec:
   replicas: {{ .Values.replicas }}
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: outline
   template:
     metadata:
       labels:
@@ -19,11 +22,11 @@ spec:
             # Generate a hex-encoded 32-byte random key. You should use `openssl rand -hex 32`
             # in your terminal to generate a random value.
             - name: SECRET_KEY
-              value: {{ TODO }}
+              value: {{ .Values.secretKey }}
             # Generate a unique random key. The format is not important but you could still use
             # `openssl rand -hex 32` in your terminal to produce this.
             - name: UTILS_SECRET
-              value: {{ TODO }}
+              value: {{ .Values.utilsSecret }}
             - name: DATABASE_URL
               valueFrom:
                 secretKeyRef:
@@ -37,7 +40,7 @@ spec:
             - name: URL
               value: {{ .Values.url }}
             - name: PORT
-              value: 443
+              value: "3000"
             {{- if .Values.sso.google.client_id }}
             - name: GOOGLE_CLIENT_ID
               value: {{ .Values.sso.google.client_id }}
@@ -48,9 +51,11 @@ spec:
             {{- end }}
             # Disable HTTPS to allow Istio ingress
             - name: FORCE_HTTPS
-              value: false
+              value: "false"
             # Disable telemetry
             - name: ENABLE_UPDATES
-              value: false
+              value: "false"
+            - name: PGSSLMODE
+              value: disable
           ports:
             - containerPort: 3000
